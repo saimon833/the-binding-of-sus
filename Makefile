@@ -26,3 +26,5 @@ $(OUTPUT)/%.o : %.cpp
 
 clean:
 	rm -rf output/
+run:
+	./output/program
