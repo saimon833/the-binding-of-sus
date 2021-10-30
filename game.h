@@ -1,6 +1,7 @@
 #ifndef game_h
 #define game_h
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 class Game{
     private:
