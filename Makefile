@@ -1,13 +1,27 @@
-all: main.o game.o
-	g++ main.o game.o texturemanager.o -o main -lSDL2 -lSDL2_image
-main.o: main.cpp
-	g++ -c main.cpp 
-game.o: game.h game.cpp
-	g++ -c game.cpp
-texturemanager.o: texturemanager.h texturemanager.cpp
-	g++ -c texturemanager.cpp
+.PHONY : clean all
+
+CXX:=g++
+CXXFLAGS:=-lSDL2 -lSDL2_image
+CPPFILES = src/main.cpp src/game.cpp src/texturemanager.cpp
+
+OUTPUT = ./output
+
+SOURCE_DIRS := $(dir $(CPPFILES))
+
+VPATH = $(sort $(SOURCE_DIRS))
+
+CPP_FILENAMES := $(notdir $(CPPFILES))
+
+OBJ_FILES := $(patsubst %.cpp, $(OUTPUT)/%.o, $(CPP_FILENAMES) )
+
+all : $(OUTPUT)/program
+
+$(OUTPUT)/program : $(OBJ_FILES)
+	g++ $(CXXFLAGS) -o $@ $^
+
+$(OUTPUT)/%.o : %.cpp
+	$(shell mkdir -p $(OUTPUT) )
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
-	rm main.o
-	rm main
-	rm game.o
-	rm texturemanager.o
+	rm -rf output/
