@@ -2,7 +2,8 @@
 
 CXX:=g++
 CXXFLAGS:=-lSDL2 -lSDL2_image
-CPPFILES = src/main.cpp src/game.cpp src/texturemanager.cpp
+#CPPFILES = src/main.cpp src/game.cpp src/texturemanager.cpp
+CPPFILES := $(wildcard src/*.cpp)
 
 OUTPUT = ./output
 
