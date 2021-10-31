@@ -1,8 +1,9 @@
 #include "game.h"
-#include "texturemanager.h"
-SDL_Texture* player_tex;
-SDL_Rect srcR, destR;
+#include "texture_manager.h"
+#include "game_object.h"
 
+GameObject* player;
+GameObject* enemy;
 
 Game::Game(){
 
@@ -29,9 +30,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }
     else
         is_running = false;
-    player_tex = TextureManager::LoadTexture("assets/player.png",renderer);
-    
-    
+    player=new GameObject("assets/player.png",renderer,0,0);
+    enemy=new GameObject("assets/enemy.png",renderer,50,50);
 }
 void Game::handle_events(){
     SDL_Event event;
@@ -45,16 +45,18 @@ void Game::handle_events(){
     }
 }
 void Game::update(){
-    cnt+=1;
-    destR.h=64;
-    destR.w=64;
-    destR.x=cnt;
+    player->update();
+    enemy->update();
+    
+    
 }
 void Game::render(){
     SDL_RenderClear(renderer);
     //dodac rzeczy do renderowania
-    SDL_RenderCopy(renderer,player_tex,NULL,&destR);
+    player->render();
+    enemy->render();
     SDL_RenderPresent(renderer);
+
 }
 void Game::clean(){
     SDL_DestroyWindow(window);

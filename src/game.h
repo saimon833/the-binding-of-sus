@@ -1,3 +1,4 @@
+#pragma once
 #ifndef game_h
 #define game_h
 #include <SDL2/SDL.h>
