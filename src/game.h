@@ -1,16 +1,19 @@
 #pragma once
-#ifndef game_h
-#define game_h
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <cstdint>
+#include <vector>
+#include "game_object.h"
+#include "layer.h"
 class Game{
     private:
-        bool is_running;
-        SDL_Window *window;
-        SDL_Renderer *renderer;
-        int cnt=0;
+        bool m_isRunning;
+        SDL_Window *m_window;
+        SDL_Renderer *m_renderer;
+        std::vector<GameObject> m_objects;
+        CommonResources m_commonResources; 
+
     public:
         Game();
         ~Game();
@@ -19,8 +22,6 @@ class Game{
         void update();
         void render();
         void clean();
-        bool running(){ return is_running; }
+        bool running(){ return m_isRunning; }
         
 };
-
-#endif

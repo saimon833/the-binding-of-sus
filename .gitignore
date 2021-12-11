@@ -1,6 +1,14 @@
 # Prerequisites
 *.d
-
+CMakeFiles/*
+Testing/*
+cmake_install.cmake
+CMakeCache.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+CTestConfiguration.tcl
+DartConfiguration.tcl
+CTestTestfile.cmake
 # Compiled Object files
 *.slo
 *.lo
@@ -31,3 +39,4 @@
 *.out
 *.app
 program
+gaem

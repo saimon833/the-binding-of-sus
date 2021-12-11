@@ -1,20 +1,10 @@
 #pragma once
-#ifndef game_object_h
-#define game_object_h
-#include "game.h"
+#include "layer.h"
 class GameObject{
-    private:
-        int xpos;
-        int ypos;
-        SDL_Texture* obj_texture;
-        SDL_Rect src_rec, dst_rec;
-        SDL_Renderer* renderer;
     public:
-        GameObject(const char* texture_sheet, SDL_Renderer* ren, int x, int y);
-        ~GameObject();
-        void update();
-        void render();
+        CommonResources* m_commonResources;
+        GameObject(){};
+        virtual ~GameObject(){};
+        virtual void update()=0;
+        virtual void render()=0;
 };
-
-
-#endif
