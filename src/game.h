@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdint>
 #include <vector>
+#include <box2d/box2d.h>
 #include "game_object.h"
 #include "layer.h"
 class Game{
@@ -12,8 +13,8 @@ class Game{
         SDL_Window *m_window;
         SDL_Renderer *m_renderer;
         std::vector<GameObject> m_objects;
-        CommonResources m_commonResources; 
-
+        CommonResources m_commonResources;
+        b2World* m_b2world;
     public:
         Game();
         ~Game();

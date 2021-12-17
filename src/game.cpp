@@ -7,7 +7,7 @@ Game::Game(){
 
 }
 Game::~Game(){
-
+    delete m_b2world;
 }
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen){
     int flags=0;
@@ -28,7 +28,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }
     else
         m_isRunning = false;
-    player=new Actor("assets/player.png",m_renderer,m_commonResources,100,100);
+    b2Vec2 gravity(0.0f, 0.0f);
+    m_b2world=new b2World(gravity);
+    player=new Actor(m_b2world,"assets/player.png",m_renderer,m_commonResources,100,100);
     //enemy=new Actor("assets/enemy.png",renderer,50,50);
 }
 void Game::handle_events(){
@@ -55,7 +57,7 @@ void Game::handle_events(){
                 default:
                     break;
                 } 
-            std::cout<<"Key press detected"<<std::endl;
+            //std::cout<<"Key press detected"<<std::endl;
             break;
 
         case SDL_KEYUP:
@@ -76,7 +78,7 @@ void Game::handle_events(){
                     break;
                 } 
             
-            std::cout<<"Key release detected"<<std::endl;
+            //std::cout<<"Key release detected"<<std::endl;
             break;
 
         default:
