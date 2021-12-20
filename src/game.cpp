@@ -30,6 +30,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         m_isRunning = false;
     b2Vec2 gravity(0.0f, 0.0f);
     m_b2world=new b2World(gravity);
+    
     player=new Actor(m_b2world,"assets/player.png",m_renderer,m_commonResources,100,100);
     //enemy=new Actor("assets/enemy.png",renderer,50,50);
 }
@@ -85,7 +86,12 @@ void Game::handle_events(){
             break;
     }
 }
-void Game::update(){
+void Game::update(float frameTime){
+    //while(){
+        m_b2world->Step(Game::timeStep, 8, 3);
+        //boxStepClock -= stepDelay;
+        m_b2world->ClearForces();
+    //}
     player->update();
     //enemy->update();
     

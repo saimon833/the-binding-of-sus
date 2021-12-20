@@ -15,12 +15,13 @@ class Game{
         std::vector<GameObject> m_objects;
         CommonResources m_commonResources;
         b2World* m_b2world;
+        const float timeStep = 1.0f/300.0f;
     public:
         Game();
         ~Game();
         void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
         void handle_events();
-        void update();
+        void update(float frameTime);
         void render();
         void clean();
         bool running(){ return m_isRunning; }
