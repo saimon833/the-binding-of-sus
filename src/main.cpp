@@ -5,9 +5,9 @@ Game *game = nullptr;
 int main(int argc, char *argv[]){
 
     const int FPS = 165;
-    const int frameDelay = 1000/FPS;
+    const double frameDelay = 1000/(double)FPS;
     Uint32 frameStart;
-    int frameTime;
+    float frameTime;
 
     game = new Game();
     game->init("dupa",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800,600,false);
