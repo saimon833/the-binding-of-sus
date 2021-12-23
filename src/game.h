@@ -12,10 +12,12 @@ class Game{
         bool m_isRunning;
         SDL_Window *m_window;
         SDL_Renderer *m_renderer;
-        std::vector<GameObject> m_objects;
+        std::vector<GameObject*> m_objects;
         CommonResources m_commonResources;
         b2World* m_b2world;
-        const float timeStep = 1.0f/300.0f;
+        const double m_timeStep = 1./300.;
+        double m_physicsTimeAccumulator=0.0;
+        const double m_physicsDelay = 1./60.;
     public:
         Game();
         ~Game();

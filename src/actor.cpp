@@ -1,6 +1,6 @@
 #include "actor.h"
-#define VELOCITY 500
-Actor::Actor(b2World* world,const char* texture_sheet, SDL_Renderer* ren,CommonResources &commonResources, int x, int y){
+#define VELOCITY 5
+Actor::Actor(b2World* world, const char* texture_sheet, SDL_Renderer* ren, CommonResources &commonResources, int x, int y){
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet,ren);
     m_xpos=x;

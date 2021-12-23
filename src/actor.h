@@ -11,11 +11,12 @@ private:
     SDL_Renderer* m_renderer;
     b2Body* m_body;
     /* data */
-    void updatePhysics();
     void updatePosition();
+    void updatePhysics();
 public:
     Actor(b2World* world, const char* textureSheet, SDL_Renderer* ren, CommonResources &commonResources, int x, int y);
     ~Actor();
     virtual void render() override;
     virtual void update() override;
+
 };

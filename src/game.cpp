@@ -1,5 +1,6 @@
 #include "game.h"
 #include "actor.h"
+#include "wall.h"
 GameObject* player;
 //GameObject* enemy;
 
@@ -31,7 +32,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     b2Vec2 gravity(0.0f, 0.0f);
     m_b2world=new b2World(gravity);
     
-    player=new Actor(m_b2world,"assets/player.png",m_renderer,m_commonResources,100,100);
+    player=new Actor(m_b2world, "assets/player.png", m_renderer, m_commonResources, 100, 100);
+    m_objects.push_back(player);
     //enemy=new Actor("assets/enemy.png",renderer,50,50);
 }
 void Game::handle_events(){
@@ -87,12 +89,16 @@ void Game::handle_events(){
     }
 }
 void Game::update(float frameTime){
-    //while(){
-        m_b2world->Step(Game::timeStep, 8, 3);
+    m_physicsTimeAccumulator+=frameTime;
+    while(m_physicsTimeAccumulator>m_physicsDelay){
+        m_b2world->Step(m_timeStep, 8, 3);
+        m_physicsTimeAccumulator-=m_physicsDelay;
         //boxStepClock -= stepDelay;
         m_b2world->ClearForces();
-    //}
-    player->update();
+    }
+    for(auto object: m_objects){
+        object->update();
+    }
     //enemy->update();
     
     
@@ -100,7 +106,10 @@ void Game::update(float frameTime){
 void Game::render(){
     SDL_RenderClear(m_renderer);
     //dodac rzeczy do renderowania
-    player->render();
+    for(auto object: m_objects){
+        object->render();
+    }
+    //player->render();
     //enemy->render();
     SDL_RenderPresent(m_renderer);
 

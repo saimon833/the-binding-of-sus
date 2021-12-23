@@ -225,6 +225,30 @@ src/texture_manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/texture_manager.cpp.s
 .PHONY : src/texture_manager.cpp.s
 
+src/wall.o: src/wall.cpp.o
+.PHONY : src/wall.o
+
+# target to build an object file
+src/wall.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/wall.cpp.o
+.PHONY : src/wall.cpp.o
+
+src/wall.i: src/wall.cpp.i
+.PHONY : src/wall.i
+
+# target to preprocess a source file
+src/wall.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/wall.cpp.i
+.PHONY : src/wall.cpp.i
+
+src/wall.s: src/wall.cpp.s
+.PHONY : src/wall.s
+
+# target to generate assembly for a file
+src/wall.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/wall.cpp.s
+.PHONY : src/wall.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -246,6 +270,9 @@ help:
 	@echo "... src/texture_manager.o"
 	@echo "... src/texture_manager.i"
 	@echo "... src/texture_manager.s"
+	@echo "... src/wall.o"
+	@echo "... src/wall.i"
+	@echo "... src/wall.s"
 .PHONY : help
 
 
