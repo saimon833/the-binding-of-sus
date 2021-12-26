@@ -7,4 +7,6 @@ public:
     virtual ~GameObject(){};
     virtual void update() = 0;
     virtual void render() = 0;
+    virtual int getPosX() = 0;
+    virtual int getPosY() = 0;
 };

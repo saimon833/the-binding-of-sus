@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus
+CMAKE_BINARY_DIR = "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/CMakeFiles /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/CMakeFiles" "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -201,6 +201,78 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/obstacle.o: src/obstacle.cpp.o
+.PHONY : src/obstacle.o
+
+# target to build an object file
+src/obstacle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/obstacle.cpp.o
+.PHONY : src/obstacle.cpp.o
+
+src/obstacle.i: src/obstacle.cpp.i
+.PHONY : src/obstacle.i
+
+# target to preprocess a source file
+src/obstacle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/obstacle.cpp.i
+.PHONY : src/obstacle.cpp.i
+
+src/obstacle.s: src/obstacle.cpp.s
+.PHONY : src/obstacle.s
+
+# target to generate assembly for a file
+src/obstacle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/obstacle.cpp.s
+.PHONY : src/obstacle.cpp.s
+
+src/params.o: src/params.cpp.o
+.PHONY : src/params.o
+
+# target to build an object file
+src/params.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.o
+.PHONY : src/params.cpp.o
+
+src/params.i: src/params.cpp.i
+.PHONY : src/params.i
+
+# target to preprocess a source file
+src/params.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.i
+.PHONY : src/params.cpp.i
+
+src/params.s: src/params.cpp.s
+.PHONY : src/params.s
+
+# target to generate assembly for a file
+src/params.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.s
+.PHONY : src/params.cpp.s
+
+src/projectile.o: src/projectile.cpp.o
+.PHONY : src/projectile.o
+
+# target to build an object file
+src/projectile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/projectile.cpp.o
+.PHONY : src/projectile.cpp.o
+
+src/projectile.i: src/projectile.cpp.i
+.PHONY : src/projectile.i
+
+# target to preprocess a source file
+src/projectile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/projectile.cpp.i
+.PHONY : src/projectile.cpp.i
+
+src/projectile.s: src/projectile.cpp.s
+.PHONY : src/projectile.s
+
+# target to generate assembly for a file
+src/projectile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/projectile.cpp.s
+.PHONY : src/projectile.cpp.s
+
 src/texture_manager.o: src/texture_manager.cpp.o
 .PHONY : src/texture_manager.o
 
@@ -267,6 +339,15 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/obstacle.o"
+	@echo "... src/obstacle.i"
+	@echo "... src/obstacle.s"
+	@echo "... src/params.o"
+	@echo "... src/params.i"
+	@echo "... src/params.s"
+	@echo "... src/projectile.o"
+	@echo "... src/projectile.i"
+	@echo "... src/projectile.s"
 	@echo "... src/texture_manager.o"
 	@echo "... src/texture_manager.i"
 	@echo "... src/texture_manager.s"

@@ -2,18 +2,18 @@
 #define VELOCITY 5
 Actor::Actor(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, int x, int y) {
     m_renderer = ren;
-    m_objTexture = TextureManager::LoadTexture(texture_sheet, ren);
-    m_xpos = x-32;
-    m_ypos = y-32;
+    m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
-    m_srcRec.h = 32;
-    m_srcRec.w = 32;
+    m_xpos = x-m_commonResources->gameProperties.spiriteSize;
+    m_ypos = y-m_commonResources->gameProperties.spiriteSize;
+    m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
+    m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.x = 0;
     m_srcRec.y = 0;
     m_dstRec.x = m_xpos;
     m_dstRec.y = m_ypos;
-    m_dstRec.w = m_srcRec.w * 2;
-    m_dstRec.h = m_srcRec.h * 2;
+    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
+    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     // b2PolygonShape hitBox;
     // hitBox.SetAsBox(2, 1);
 
@@ -37,8 +37,8 @@ void Actor::update() {
     updatePosition();
     m_dstRec.x = m_xpos;
     m_dstRec.y = m_ypos;
-    m_dstRec.w = m_srcRec.w * 2;
-    m_dstRec.h = m_srcRec.h * 2;
+    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
+    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     //std::cout << m_xpos << " " << m_ypos << std::endl;
 }
 void Actor::render() {
@@ -72,4 +72,5 @@ void Actor::updatePosition() {
     auto position = m_body->GetPosition();
     m_xpos = position.x-32;
     m_ypos = position.y-32;
+    //std::cout<<m_xpos<<" "<<m_ypos<<std::endl;
 }

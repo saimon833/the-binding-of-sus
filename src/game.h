@@ -18,12 +18,16 @@ private:
     b2World *m_b2world;
     const double m_timeStep = 1. / 300.;
     double m_physicsTimeAccumulator = 0.0;
+    double m_shootingTimeAccumulator = 0.0;
     const double m_physicsDelay = 1. / 60.;
+    const double m_shootingDelay =250.;
+    void spawnProjectile(float frameTime);
+
 
 public:
     Game();
     ~Game();
-    void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
+    void init(const char *title, int xpos, int ypos, bool fullscreen);
     void handleEvents();
     void update(float frameTime);
     void render();
