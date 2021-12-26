@@ -1,6 +1,6 @@
 #include "projectile.h"
 #define VELOCITY 10
-Projectile::Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commonResources, int x, int y) {
+Projectile::Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y) {
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture("assets/projectile.png", m_renderer);
     GameObject::m_commonResources = &commonResources;
@@ -35,7 +35,7 @@ Projectile::Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commo
     m_dstRec.w = m_srcRec.w * 2;
     auto m_hitBox = new b2BodyDef();
     m_hitBox->type = b2_dynamicBody;
-    m_hitBox->position.Set(m_xpos-12, m_ypos-12);
+    m_hitBox->position.Set(m_xpos - 12, m_ypos - 12);
     m_hitBox->angle = 0;
     m_hitBox->linearDamping = 0.;
     m_hitBox->angularDamping = 0.;
@@ -55,14 +55,14 @@ void Projectile::updatePosition() {
     m_ypos = position.y;
     //std::cout<<m_xpos<<" "<<m_ypos<<std::endl;
 }
-void Projectile::update(){
+void Projectile::update() {
     updatePosition();
-    m_dstRec.x = m_xpos-12;
-    m_dstRec.y = m_ypos-12;
+    m_dstRec.x = m_xpos - 12;
+    m_dstRec.y = m_ypos - 12;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
 }
-Projectile::~Projectile(){}
+Projectile::~Projectile() {}
 void Projectile::render() {
     SDL_RenderCopy(m_renderer, m_objTexture, &m_srcRec, &m_dstRec);
 }

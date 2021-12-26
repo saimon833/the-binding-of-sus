@@ -30,8 +30,8 @@ Obstacle::Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonRes
     m_body->CreateFixture(&fixture);
 }
 int Obstacle::random(int n) {
-    int tmp = rand() % (n - 128) + 50;
-    return tmp-tmp%70;
+    int tmp = rand() % (n - 200) + 150;
+    return tmp - tmp % 70;
 }
 void Obstacle::update() {
     //m_dstRec.x = m_xpos;

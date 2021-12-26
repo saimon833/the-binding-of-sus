@@ -15,10 +15,10 @@ private:
     void updatePosition();
 
 public:
-    Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commonResources, int x, int y);
+    Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y);
     ~Projectile();
     virtual void render() override;
     virtual void update() override;
-    virtual int getPosX() override { return m_xpos; }
-    virtual int getPosY() override { return m_ypos; }
+    virtual int getPosX() const override { return m_xpos; }
+    virtual int getPosY() const override { return m_ypos; }
 };

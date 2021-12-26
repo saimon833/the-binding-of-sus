@@ -11,17 +11,16 @@ private:
     int scale;
     SDL_Texture *m_objTexture;
     SDL_Rect m_srcRec, m_dstRec;
-    b2Body* m_body;
-    SDL_Renderer * m_renderer;
+    b2Body *m_body;
+    SDL_Renderer *m_renderer;
     // SDL_Renderer *m_renderer;
     int random(int n);
-    
-    public:
+
+public:
     Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonResources);
     ~Obstacle();
     virtual void render() override;
     virtual void update() override;
-    virtual int getPosX() override{return m_xpos;}
-    virtual int getPosY() override{return m_ypos;}
-    
+    virtual int getPosX() const override { return m_xpos; }
+    virtual int getPosY() const override { return m_ypos; }
 };

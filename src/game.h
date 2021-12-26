@@ -20,9 +20,8 @@ private:
     double m_physicsTimeAccumulator = 0.0;
     double m_shootingTimeAccumulator = 0.0;
     const double m_physicsDelay = 1. / 60.;
-    const double m_shootingDelay =250.;
+    const double m_shootingDelay = 250.;
     void spawnProjectile(float frameTime);
-
 
 public:
     Game();

@@ -10,10 +10,10 @@ private:
     b2Body *m_body;
     /* data */
 public:
-    Wall(b2World *world, int x, int y, int h, int w);
+    Wall(b2World *world, const int &x, const int &y, const int &h, const int &w);
     ~Wall();
     virtual void render() override{};
     virtual void update() override{};
-    virtual int getPosX() override{return m_xpos;}
-    virtual int getPosY() override{return m_ypos;}
+    virtual int getPosX() const override { return m_xpos; }
+    virtual int getPosY() const override { return m_ypos; }
 };

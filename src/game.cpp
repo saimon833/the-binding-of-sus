@@ -40,10 +40,10 @@ void Game::init(const char *title, int xpos, int ypos, bool fullscreen) {
     b2Vec2 gravity(0.0f, 0.0f);
     m_b2world = new b2World(gravity);
 
-    lwall = new Wall(m_b2world, -1, 0, m_commonResources.gameProperties.window_h, 0);
-    rwall = new Wall(m_b2world, m_commonResources.gameProperties.window_w + 1, 0, m_commonResources.gameProperties.window_h, 0);
-    bwall = new Wall(m_b2world, 1, m_commonResources.gameProperties.window_h, 0, m_commonResources.gameProperties.window_w - 2);
-    twall = new Wall(m_b2world, 1, -1, 0, m_commonResources.gameProperties.window_w - 2);
+    m_objects.push_back(new Wall(m_b2world, -1, 0, m_commonResources.gameProperties.window_h, 0));
+    m_objects.push_back(new Wall(m_b2world, m_commonResources.gameProperties.window_w + 1, 0, m_commonResources.gameProperties.window_h, 0));
+    m_objects.push_back(new Wall(m_b2world, 1, m_commonResources.gameProperties.window_h, 0, m_commonResources.gameProperties.window_w - 2));
+    m_objects.push_back(new Wall(m_b2world, 1, -1, 0, m_commonResources.gameProperties.window_w - 2));
     player = new Actor(m_b2world, "assets/box.png", m_renderer, m_commonResources, 0, 0);
     m_objects.push_back(player);
     for (int i = 0; i < 10; i++) {
@@ -148,7 +148,7 @@ void Game::spawnProjectile(float frameTime) {
     m_shootingTimeAccumulator += frameTime;
     if ((m_shootingTimeAccumulator > m_shootingDelay) && (m_commonResources.keyState.shootUp || m_commonResources.keyState.shootDown || m_commonResources.keyState.shootLeft || m_commonResources.keyState.shootRight)) {
         m_objects.push_back(new Projectile(m_b2world, m_renderer, m_commonResources, xpos, ypos));
-        std::cout << "shoot fired" << std::endl;
+        std::cout << "shot fired" << std::endl;
         m_shootingTimeAccumulator = 0;
     }
 }

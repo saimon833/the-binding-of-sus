@@ -1,11 +1,11 @@
 #include "actor.h"
 #define VELOCITY 5
-Actor::Actor(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, int x, int y) {
+Actor::Actor(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y) {
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
-    m_xpos = x-m_commonResources->gameProperties.spiriteSize;
-    m_ypos = y-m_commonResources->gameProperties.spiriteSize;
+    m_xpos = x - m_commonResources->gameProperties.spiriteSize;
+    m_ypos = y - m_commonResources->gameProperties.spiriteSize;
     m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.x = 0;
@@ -70,7 +70,7 @@ void Actor::updatePhysics() {
 }
 void Actor::updatePosition() {
     auto position = m_body->GetPosition();
-    m_xpos = position.x-32;
-    m_ypos = position.y-32;
+    m_xpos = position.x - 32;
+    m_ypos = position.y - 32;
     //std::cout<<m_xpos<<" "<<m_ypos<<std::endl;
 }
