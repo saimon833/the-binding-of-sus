@@ -2,12 +2,16 @@
 #include "actor.h"
 #include "wall.h"
 GameObject *player;
-//GameObject* enemy;
+GameObject *lwall, *rwall, *twall, *bwall;
+// GameObject* enemy;
 
 Game::Game() {
 }
 Game::~Game() {
     delete m_b2world;
+    for (auto object : m_objects){
+        delete object;
+    }
 }
 void Game::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen) {
     int flags = 0;
@@ -30,8 +34,15 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     b2Vec2 gravity(0.0f, 0.0f);
     m_b2world = new b2World(gravity);
 
-    player = new Actor(m_b2world, "assets/player.png", m_renderer, m_commonResources, 100, 100);
+    player = new Actor(m_b2world, "assets/box.png", m_renderer, m_commonResources, 0, 0);
+    lwall=new Wall(m_b2world,-1,0,height,0);
+    rwall=new Wall(m_b2world,width+1,0,height,0);
+    bwall=new Wall(m_b2world,1,height,0,width-2);
+    twall=new Wall(m_b2world,1,-1,0,width-2);
     m_objects.push_back(player);
+    //m_objects.push_back(lwall);
+    m_commonResources.windowProperties.h=height;
+    m_commonResources.windowProperties.w=width;
 }
 void Game::handleEvents() {
     SDL_Event event;
@@ -41,17 +52,17 @@ void Game::handleEvents() {
             m_isRunning = false;
             break;
         case SDL_KEYDOWN:
-            switch (event.key.keysym.scancode) { //ustawianie nacisniecia klawiszy
-                case SDL_SCANCODE_LEFT:
+            switch (event.key.keysym.sym) { //ustawianie nacisniecia klawiszy
+                case SDLK_a:
                     m_commonResources.keyState.moveLeft = 1;
                     break;
-                case SDL_SCANCODE_RIGHT:
+                case SDLK_d:
                     m_commonResources.keyState.moveRight = 1;
                     break;
-                case SDL_SCANCODE_UP:
+                case SDLK_w:
                     m_commonResources.keyState.moveUp = 1;
                     break;
-                case SDL_SCANCODE_DOWN:
+                case SDLK_s:
                     m_commonResources.keyState.moveDown = 1;
                     break;
                 default:
@@ -60,17 +71,17 @@ void Game::handleEvents() {
             break;
 
         case SDL_KEYUP:
-            switch (event.key.keysym.scancode) { //ustawianie puszczenia klawiszy
-                case SDL_SCANCODE_LEFT:
+            switch (event.key.keysym.sym) { //ustawianie puszczenia klawiszy
+                case SDLK_a:
                     m_commonResources.keyState.moveLeft = 0;
                     break;
-                case SDL_SCANCODE_RIGHT:
+                case SDLK_d:
                     m_commonResources.keyState.moveRight = 0;
                     break;
-                case SDL_SCANCODE_UP:
+                case SDLK_w:
                     m_commonResources.keyState.moveUp = 0;
                     break;
-                case SDL_SCANCODE_DOWN:
+                case SDLK_s:
                     m_commonResources.keyState.moveDown = 0;
                     break;
                 default:

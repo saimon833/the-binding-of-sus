@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <iostream>
 #include <vector>
+
 class Game {
 private:
     bool m_isRunning;
