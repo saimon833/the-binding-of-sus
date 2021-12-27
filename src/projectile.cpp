@@ -6,12 +6,12 @@ Projectile::Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commo
     GameObject::m_commonResources = &commonResources;
     if (m_commonResources->keyState.shootUp) {
         m_ypos = y + 32 - 64;
-        m_xpos = x + 32;
+        m_xpos = x + 48;
         m_velocity.x = 0;
         m_velocity.y = -VELOCITY;
     } else if (m_commonResources->keyState.shootDown) {
         m_ypos = y + 32 + 64;
-        m_xpos = x + 32;
+        m_xpos = x + 48;
         m_velocity.x = 0;
         m_velocity.y = VELOCITY;
     } else if (m_commonResources->keyState.shootLeft) {

@@ -12,13 +12,12 @@ private:
     /* data */
     void updatePosition();
     void updatePhysics();
-    std::vector<GameObject> m_objects;
 
 public:
-    Actor(b2World *world, const char *textureSheet, SDL_Renderer *ren,CommonResources &commonResources, const int& x, const int& y);
+    Actor(b2World *world, const char *textureSheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y);
     ~Actor();
     virtual void render() override;
     virtual void update() override;
-    int getPosX()const{return m_xpos;}
-    int getPosY()const{return m_ypos;}
+    int getPosX() const { return m_xpos; }
+    int getPosY() const { return m_ypos; }
 };

@@ -7,6 +7,7 @@ struct GameProperties {
     int window_h;
     int window_w;
     int spiriteSize, scale;
+    int projectileSize, projectileScale;
 };
 struct CommonResources {
     KeyState keyState;
