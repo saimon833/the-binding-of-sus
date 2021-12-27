@@ -12,4 +12,5 @@ struct GameProperties {
 struct CommonResources {
     KeyState keyState;
     GameProperties gameProperties;
+    double timeStep;
 };

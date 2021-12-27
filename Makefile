@@ -153,6 +153,30 @@ src/actor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/actor.cpp.s
 .PHONY : src/actor.cpp.s
 
+src/boss.o: src/boss.cpp.o
+.PHONY : src/boss.o
+
+# target to build an object file
+src/boss.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/boss.cpp.o
+.PHONY : src/boss.cpp.o
+
+src/boss.i: src/boss.cpp.i
+.PHONY : src/boss.i
+
+# target to preprocess a source file
+src/boss.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/boss.cpp.i
+.PHONY : src/boss.cpp.i
+
+src/boss.s: src/boss.cpp.s
+.PHONY : src/boss.s
+
+# target to generate assembly for a file
+src/boss.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/boss.cpp.s
+.PHONY : src/boss.cpp.s
+
 src/game.o: src/game.cpp.o
 .PHONY : src/game.o
 
@@ -249,6 +273,30 @@ src/params.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.s
 .PHONY : src/params.cpp.s
 
+src/player.o: src/player.cpp.o
+.PHONY : src/player.o
+
+# target to build an object file
+src/player.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/player.cpp.o
+.PHONY : src/player.cpp.o
+
+src/player.i: src/player.cpp.i
+.PHONY : src/player.i
+
+# target to preprocess a source file
+src/player.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/player.cpp.i
+.PHONY : src/player.cpp.i
+
+src/player.s: src/player.cpp.s
+.PHONY : src/player.s
+
+# target to generate assembly for a file
+src/player.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/player.cpp.s
+.PHONY : src/player.cpp.s
+
 src/projectile.o: src/projectile.cpp.o
 .PHONY : src/projectile.o
 
@@ -333,6 +381,9 @@ help:
 	@echo "... src/actor.o"
 	@echo "... src/actor.i"
 	@echo "... src/actor.s"
+	@echo "... src/boss.o"
+	@echo "... src/boss.i"
+	@echo "... src/boss.s"
 	@echo "... src/game.o"
 	@echo "... src/game.i"
 	@echo "... src/game.s"
@@ -345,6 +396,9 @@ help:
 	@echo "... src/params.o"
 	@echo "... src/params.i"
 	@echo "... src/params.s"
+	@echo "... src/player.o"
+	@echo "... src/player.i"
+	@echo "... src/player.s"
 	@echo "... src/projectile.o"
 	@echo "... src/projectile.i"
 	@echo "... src/projectile.s"

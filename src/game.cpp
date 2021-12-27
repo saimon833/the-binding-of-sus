@@ -1,13 +1,11 @@
 #include "game.h"
-#include "actor.h"
+#include "player.h"
+#include "boss.h"
 #include "obstacle.h"
 #include "params.h"
 #include "projectile.h"
 #include "wall.h"
-GameObject *player;
-GameObject *lwall, *rwall, *twall, *bwall;
-// GameObject *tmp;
-//  GameObject* enemy;
+GameObject *player, *enemy;
 
 Game::Game() {
 }
@@ -44,8 +42,11 @@ void Game::init(const char *title, int xpos, int ypos, bool fullscreen) {
     m_objects.push_back(new Wall(m_b2world, m_commonResources.gameProperties.window_w + 1, 0, m_commonResources.gameProperties.window_h, 0));
     m_objects.push_back(new Wall(m_b2world, 1, m_commonResources.gameProperties.window_h, 0, m_commonResources.gameProperties.window_w - 2));
     m_objects.push_back(new Wall(m_b2world, 1, -1, 0, m_commonResources.gameProperties.window_w - 2));
-    player = new Actor(m_b2world, "assets/box.png", m_renderer, m_commonResources, 0, 0);
+    player = new Player(m_b2world, "assets/player.png", m_renderer, m_commonResources, 0, 0);
     m_objects.push_back(player);
+    enemy = new Boss(m_b2world,"assets/enemy.png",m_renderer,m_commonResources,750, 550);
+    m_objects.push_back(enemy);
+
     for (int i = 0; i < 10; i++) {
         m_objects.push_back(new Obstacle(m_b2world, m_renderer, m_commonResources));
         SDL_Delay(75);
@@ -117,6 +118,7 @@ void Game::handleEvents() {
     }
 }
 void Game::update(float frameTime) {
+    m_commonResources.timeStep=frameTime;
     m_physicsTimeAccumulator += frameTime;
     while (m_physicsTimeAccumulator > m_physicsDelay) {
         m_b2world->Step(m_timeStep, 8, 3);
