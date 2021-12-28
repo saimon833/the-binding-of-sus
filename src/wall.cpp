@@ -1,8 +1,8 @@
 #include "wall.h"
 Wall::Wall(b2World *world, const int &x, const int &y, const int &h, const int &w) {
     // m_renderer = ren;
-    m_xpos = x;
-    m_ypos = y;
+    m_posiotion.x= x;
+    m_posiotion.y= y;
     m_height = h;
     m_width = w;
     b2BodyDef myBodyDef;

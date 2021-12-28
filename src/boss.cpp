@@ -1,18 +1,18 @@
 #include "boss.h"
 #include <cstdlib>
 #define VELOCITY 3
-Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y) {
+Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y){
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
-    m_xpos = x - m_commonResources->gameProperties.spiriteSize;
-    m_ypos = y - m_commonResources->gameProperties.spiriteSize;
+    m_posiotion.x = x - m_commonResources->gameProperties.spiriteSize;
+    m_posiotion.y = y - m_commonResources->gameProperties.spiriteSize;
     m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.x = 0;
     m_srcRec.y = 0;
-    m_dstRec.x = m_xpos;
-    m_dstRec.y = m_ypos;
+    m_dstRec.x = m_posiotion.x;
+    m_dstRec.y = m_posiotion.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     // b2PolygonShape hitBox;
@@ -36,8 +36,8 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
 void Boss::update() {
     move();
     updatePosition();
-    m_dstRec.x = m_xpos;
-    m_dstRec.y = m_ypos;
+    m_dstRec.x = m_posiotion.x;
+    m_dstRec.y = m_posiotion.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     // std::cout << m_xpos << " " << m_ypos << std::endl;

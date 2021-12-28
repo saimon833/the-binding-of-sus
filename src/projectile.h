@@ -4,8 +4,6 @@
 #include "texture_manager.h"
 class Projectile : public GameObject {
 private:
-    int m_xpos;
-    int m_ypos;
     SDL_Texture *m_objTexture;
     SDL_Rect m_srcRec, m_dstRec;
     SDL_Renderer *m_renderer;
@@ -19,6 +17,4 @@ public:
     ~Projectile();
     virtual void render() override;
     virtual void update() override;
-    virtual int getPosX() const override { return m_xpos; }
-    virtual int getPosY() const override { return m_ypos; }
 };

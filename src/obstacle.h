@@ -4,8 +4,6 @@
 #include "texture_manager.h"
 class Obstacle : public GameObject {
 private:
-    int m_xpos;
-    int m_ypos;
     int m_height;
     int m_width;
     int scale;
@@ -21,6 +19,4 @@ public:
     ~Obstacle();
     virtual void render() override;
     virtual void update() override;
-    virtual int getPosX() const override { return m_xpos; }
-    virtual int getPosY() const override { return m_ypos; }
 };

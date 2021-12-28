@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 struct KeyState {
     bool moveUp = 0, moveDown = 0, moveLeft = 0, moveRight = 0;
     bool shootUp = 0, shootDown = 0, shootLeft = 0, shootRight = 0;
@@ -13,4 +14,7 @@ struct CommonResources {
     KeyState keyState;
     GameProperties gameProperties;
     double timeStep;
+};
+struct position {
+    int x, y;
 };
