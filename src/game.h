@@ -6,7 +6,6 @@
 #include <box2d/box2d.h>
 #include <iostream>
 #include <vector>
-
 class Game {
 private:
     bool m_isRunning;

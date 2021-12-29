@@ -28,6 +28,11 @@ Obstacle::Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonRes
     fixture.shape = &boxShape;
     fixture.density = 1;
     m_body->CreateFixture(&fixture);
+    //m_body->GetUserData().pointer=m_ID;
+    //m_body->GetUserData().pointer=(uintptr_t)this;
+    //m_body->GetUserData().pointer=m_contact;
+    m_contact=0;
+    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
 }
 int Obstacle::random(int n) {
     int tmp = rand() % (n - 200) + 150;
@@ -42,4 +47,6 @@ void Obstacle::update() {
 void Obstacle::render() {
     SDL_RenderCopy(m_renderer, m_objTexture, &m_srcRec, &m_dstRec);
 }
-Obstacle::~Obstacle() {}
+Obstacle::~Obstacle() {
+    SDL_DestroyTexture(m_objTexture);
+}

@@ -31,6 +31,11 @@ Player::Player(b2World *world, const char *texture_sheet, SDL_Renderer *ren, Com
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 1;
     m_body->CreateFixture(&fixtureDef);
+    //m_body->GetUserData().pointer=m_ID;
+    //m_body->GetUserData().pointer=(uintptr_t)this;
+    //m_body->GetUserData().pointer=m_contact;
+    m_contact=0;
+    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
 }
 void Player::update() {
     moveOnInput();
@@ -63,4 +68,7 @@ void Player::moveOnInput() {
     }
     m_body->SetLinearVelocity(newVelocity);
     // std::cout<<newVelocity.x<<"\t"<<newVelocity.y<<std::endl;
+}
+Player::~Player() {
+    SDL_DestroyTexture(m_objTexture);
 }

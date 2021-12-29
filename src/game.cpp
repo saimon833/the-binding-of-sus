@@ -1,12 +1,13 @@
 #include "game.h"
-#include "player.h"
 #include "boss.h"
+#include "my_contact_listener.h"
 #include "obstacle.h"
 #include "params.h"
+#include "player.h"
 #include "projectile.h"
 #include "wall.h"
 GameObject *g_player, *g_enemy;
-
+MyContactListener g_contactListener;
 Game::Game() {
 }
 Game::~Game() {
@@ -37,15 +38,16 @@ void Game::init(const char *title, int xpos, int ypos, bool fullscreen) {
         m_isRunning = false;
     b2Vec2 gravity(0.0f, 0.0f);
     m_b2world = new b2World(gravity);
+    m_b2world->SetContactListener(&g_contactListener);
 
     g_player = new Player(m_b2world, "assets/player.png", m_renderer, m_commonResources, 0, 0);
+    g_enemy = new Boss(m_b2world, "assets/enemy.png", m_renderer, m_commonResources, 750, 550);
+    m_objects.push_back(g_player);
+    m_objects.push_back(g_enemy);
     m_objects.push_back(new Wall(m_b2world, -1, 0, m_commonResources.gameProperties.window_h, 0));
     m_objects.push_back(new Wall(m_b2world, m_commonResources.gameProperties.window_w + 1, 0, m_commonResources.gameProperties.window_h, 0));
     m_objects.push_back(new Wall(m_b2world, 1, m_commonResources.gameProperties.window_h, 0, m_commonResources.gameProperties.window_w - 2));
     m_objects.push_back(new Wall(m_b2world, 1, -1, 0, m_commonResources.gameProperties.window_w - 2));
-    m_objects.push_back(g_player);
-    g_enemy = new Boss(m_b2world,"assets/enemy.png",m_renderer,m_commonResources,750, 550);
-    m_objects.push_back(g_enemy);
 
     for (int i = 0; i < 10; i++) {
         m_objects.push_back(new Obstacle(m_b2world, m_renderer, m_commonResources));
@@ -118,7 +120,7 @@ void Game::handleEvents() {
     }
 }
 void Game::update(float frameTime) {
-    m_commonResources.timeStep=frameTime;
+    m_commonResources.timeStep = frameTime;
     m_physicsTimeAccumulator += frameTime;
     while (m_physicsTimeAccumulator > m_physicsDelay) {
         m_b2world->Step(m_timeStep, 8, 3);
@@ -128,6 +130,12 @@ void Game::update(float frameTime) {
     spawnProjectile(frameTime);
     for (auto object : m_objects) {
         object->update();
+    }
+    for(auto object=m_objects.begin();object!=m_objects.end();object++){
+        if((*object)->getMarkForDelete()){
+            delete *object;
+            m_objects.erase(object--);
+        }
     }
 }
 void Game::render() {
@@ -145,7 +153,7 @@ void Game::clean() {
     std::cout << "Game cleaned" << std::endl;
 }
 void Game::spawnProjectile(float frameTime) {
-    position tmpPosition=g_player->getPos();
+    position tmpPosition = g_player->getPos();
     m_shootingTimeAccumulator += frameTime;
     if ((m_shootingTimeAccumulator > m_shootingDelay) && (m_commonResources.keyState.shootUp || m_commonResources.keyState.shootDown || m_commonResources.keyState.shootLeft || m_commonResources.keyState.shootRight)) {
         m_objects.push_back(new Projectile(m_b2world, m_renderer, m_commonResources, tmpPosition.x, tmpPosition.y));

@@ -8,6 +8,6 @@ private:
     int m_lastDirection=5;
 public:
     Boss(b2World *world, const char *textureSheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y);
-    virtual ~Boss() override{};
+    virtual ~Boss() override;
     virtual void update() override;
 };

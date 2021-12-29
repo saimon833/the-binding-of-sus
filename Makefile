@@ -249,6 +249,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/my_contact_listener.o: src/my_contact_listener.cpp.o
+.PHONY : src/my_contact_listener.o
+
+# target to build an object file
+src/my_contact_listener.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/my_contact_listener.cpp.o
+.PHONY : src/my_contact_listener.cpp.o
+
+src/my_contact_listener.i: src/my_contact_listener.cpp.i
+.PHONY : src/my_contact_listener.i
+
+# target to preprocess a source file
+src/my_contact_listener.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/my_contact_listener.cpp.i
+.PHONY : src/my_contact_listener.cpp.i
+
+src/my_contact_listener.s: src/my_contact_listener.cpp.s
+.PHONY : src/my_contact_listener.s
+
+# target to generate assembly for a file
+src/my_contact_listener.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/my_contact_listener.cpp.s
+.PHONY : src/my_contact_listener.cpp.s
+
 src/obstacle.o: src/obstacle.cpp.o
 .PHONY : src/obstacle.o
 
@@ -417,6 +441,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/my_contact_listener.o"
+	@echo "... src/my_contact_listener.i"
+	@echo "... src/my_contact_listener.s"
 	@echo "... src/obstacle.o"
 	@echo "... src/obstacle.i"
 	@echo "... src/obstacle.s"

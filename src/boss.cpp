@@ -32,6 +32,9 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 1;
     m_body->CreateFixture(&fixtureDef);
+    //m_body->GetUserData().pointer=m_ID;
+    m_contact=0;
+    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
 }
 void Boss::update() {
     move();
@@ -40,6 +43,7 @@ void Boss::update() {
     m_dstRec.y = m_posiotion.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
+    //std::cout<<m_contact<<std::endl;
     // std::cout << m_xpos << " " << m_ypos << std::endl;
 }
 void Boss::move() {
@@ -76,4 +80,7 @@ void Boss::move() {
     } 
     
     m_body->SetLinearVelocity(m_newVelocity);
+}
+Boss::~Boss(){
+    SDL_DestroyTexture(m_objTexture);
 }
