@@ -31,8 +31,11 @@ Obstacle::Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonRes
     //m_body->GetUserData().pointer=m_ID;
     //m_body->GetUserData().pointer=(uintptr_t)this;
     //m_body->GetUserData().pointer=m_contact;
-    m_contact=0;
-    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    //m_contact=0;
+    //m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    m_hitInfo.self_id=m_ID;
+    m_body->GetUserData().pointer=(uintptr_t)&m_hitInfo;
+
 }
 int Obstacle::random(int n) {
     int tmp = rand() % (n - 200) + 150;

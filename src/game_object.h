@@ -14,7 +14,7 @@ public:
     virtual void update() = 0;
     virtual void render() = 0;
     position getPos() const { return m_posiotion; };
-    int m_contact;
+    hitInfo m_hitInfo;
     int getID(){return m_ID;};
     bool getMarkForDelete(){return m_markedForDelete;};
 };

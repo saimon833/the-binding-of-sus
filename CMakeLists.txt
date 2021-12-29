@@ -10,7 +10,7 @@ file(GLOB SRC
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(box2d REQUIRED)
-#SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} -fPIC")
+#SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} -j16")
 include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${BOX2D_INCLUDE_DIRS})
 #add_executable(gaem src/main.cpp src/actor.cpp src/game.cpp src/texture_manager.cpp)
 add_executable(gaem ${SRC})

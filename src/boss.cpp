@@ -1,7 +1,7 @@
 #include "boss.h"
 #include <cstdlib>
 #define VELOCITY 3
-Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y){
+Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y) {
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
@@ -32,9 +32,11 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 1;
     m_body->CreateFixture(&fixtureDef);
-    //m_body->GetUserData().pointer=m_ID;
-    m_contact=0;
-    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    // m_body->GetUserData().pointer=m_ID;
+    m_hitInfo.self_id = m_ID;
+    m_body->GetUserData().pointer = (uintptr_t)&m_hitInfo;
+    m_hp=100;
+    std::cout<<"Current HP: "<<m_hp<<std::endl;
 }
 void Boss::update() {
     move();
@@ -43,20 +45,30 @@ void Boss::update() {
     m_dstRec.y = m_posiotion.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
-    //std::cout<<m_contact<<std::endl;
-    // std::cout << m_xpos << " " << m_ypos << std::endl;
+    // std::cout<<m_contact<<std::endl;
+    //  std::cout << m_xpos << " " << m_ypos << std::endl;
+    if (m_hitInfo.m_contact = 1 && m_hitInfo.hit_id > 15 && !m_hitInfo.hitRegistered) {
+        m_hitTimeAccumulator+=m_commonResources->timeStep;
+        if(m_hitTimeAccumulator>50){
+        //std::cout << "Boss hit" << std::endl;
+        m_hp-=2;
+        std::cout<<"Current HP: "<<m_hp<<std::endl;
+        m_hitInfo.hitRegistered = 1;
+        m_hitTimeAccumulator=0;
+        }
+    }
+    if(m_hp<=0) m_markedForDelete=1;
 }
 void Boss::move() {
     m_moveTimeAccumulator += m_commonResources->timeStep;
     if (m_moveTimeAccumulator > 1500 || (m_body->GetLinearVelocity().x == 0 && m_body->GetLinearVelocity().y == 0)) {
         m_newVelocity.x = 0;
         m_newVelocity.y = 0;
-        
+
         int direction;
-        do{
-            direction=rand()%4;
-        }
-        while(direction%2 == m_lastDirection%2);
+        do {
+            direction = rand() % 4;
+        } while (direction % 2 == m_lastDirection % 2);
         switch (direction) {
             case 0: {
                 m_newVelocity.x = VELOCITY;
@@ -75,12 +87,14 @@ void Boss::move() {
                 break;
             }
         }
-        m_lastDirection=direction;
+        m_lastDirection = direction;
         m_moveTimeAccumulator = 0;
-    } 
-    
+    }
+
     m_body->SetLinearVelocity(m_newVelocity);
 }
-Boss::~Boss(){
+Boss::~Boss() {
+    auto *world = m_body->GetWorld();
+    world->DestroyBody(m_body);
     SDL_DestroyTexture(m_objTexture);
 }

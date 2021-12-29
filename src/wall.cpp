@@ -19,8 +19,11 @@ Wall::Wall(b2World *world, const int &x, const int &y, const int &h, const int &
     //m_body->GetUserData().pointer=m_ID;
     //m_body->GetUserData().pointer=(uintptr_t)this;
     //m_body->GetUserData().pointer=m_contact;
-    m_contact=0;
-    m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    //m_contact=0;
+    //m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    m_hitInfo.self_id=m_ID;
+    m_body->GetUserData().pointer=(uintptr_t)&m_hitInfo;
+
 }
 Wall::~Wall() {
 }

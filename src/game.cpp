@@ -157,7 +157,6 @@ void Game::spawnProjectile(float frameTime) {
     m_shootingTimeAccumulator += frameTime;
     if ((m_shootingTimeAccumulator > m_shootingDelay) && (m_commonResources.keyState.shootUp || m_commonResources.keyState.shootDown || m_commonResources.keyState.shootLeft || m_commonResources.keyState.shootRight)) {
         m_objects.push_back(new Projectile(m_b2world, m_renderer, m_commonResources, tmpPosition.x, tmpPosition.y));
-        std::cout << "shot fired" << std::endl;
         m_shootingTimeAccumulator = 0;
     }
 }

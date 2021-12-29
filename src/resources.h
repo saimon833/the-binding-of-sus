@@ -18,3 +18,9 @@ struct CommonResources {
 struct position {
     int x, y;
 };
+struct hitInfo{
+    bool m_contact=0;
+    int self_id;
+    int hit_id;
+    bool hitRegistered=0;
+};

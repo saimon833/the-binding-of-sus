@@ -11,6 +11,7 @@ private:
     b2Vec2 m_velocity;
     void updatePhysics();
     void updatePosition();
+    double m_lifeTimeAccumulator=0.0;
 
 public:
     Projectile(b2World *world, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y);
