@@ -4,14 +4,14 @@ Player::Player(b2World *world, const char *texture_sheet, SDL_Renderer *ren, Com
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
-    m_posiotion.x = x - m_commonResources->gameProperties.spiriteSize;
-    m_posiotion.y = y - m_commonResources->gameProperties.spiriteSize;
+    m_position.x = x - m_commonResources->gameProperties.spiriteSize;
+    m_position.y = y - m_commonResources->gameProperties.spiriteSize;
     m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
     m_srcRec.x = 0;
     m_srcRec.y = 0;
-    m_dstRec.x = m_posiotion.x;
-    m_dstRec.y = m_posiotion.y;
+    m_dstRec.x = m_position.x;
+    m_dstRec.y = m_position.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     // b2PolygonShape hitBox;
@@ -31,20 +31,20 @@ Player::Player(b2World *world, const char *texture_sheet, SDL_Renderer *ren, Com
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 1;
     m_body->CreateFixture(&fixtureDef);
-    //m_body->GetUserData().pointer=m_ID;
-    //m_body->GetUserData().pointer=(uintptr_t)this;
-    //m_body->GetUserData().pointer=m_contact;
-    //m_contact=0;
-    //m_body->GetUserData().pointer=(uintptr_t)&m_contact;
-    m_hitInfo.self_id=m_ID;
-    m_body->GetUserData().pointer=(uintptr_t)&m_hitInfo;
-
+    // m_body->GetUserData().pointer=m_ID;
+    // m_body->GetUserData().pointer=(uintptr_t)this;
+    // m_body->GetUserData().pointer=m_contact;
+    // m_contact=0;
+    // m_body->GetUserData().pointer=(uintptr_t)&m_contact;
+    m_hitInfo.self_id = m_ID;
+    m_body->GetUserData().pointer = (uintptr_t)&m_hitInfo;
+    m_commonResources->playerPosition = &m_position;
 }
 void Player::update() {
     moveOnInput();
     updatePosition();
-    m_dstRec.x = m_posiotion.x;
-    m_dstRec.y = m_posiotion.y;
+    m_dstRec.x = m_position.x;
+    m_dstRec.y = m_position.y;
     m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
     m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
     // std::cout << m_xpos << " " << m_ypos << std::endl;

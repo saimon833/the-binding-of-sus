@@ -131,8 +131,8 @@ void Game::update(float frameTime) {
     for (auto object : m_objects) {
         object->update();
     }
-    for(auto object=m_objects.begin();object!=m_objects.end();object++){
-        if((*object)->getMarkForDelete()){
+    for (auto object = m_objects.begin(); object != m_objects.end(); object++) {
+        if ((*object)->getMarkForDelete()) {
             delete *object;
             m_objects.erase(object--);
         }

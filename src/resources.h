@@ -10,17 +10,19 @@ struct GameProperties {
     int spiriteSize, scale;
     int projectileSize, projectileScale;
 };
-struct CommonResources {
-    KeyState keyState;
-    GameProperties gameProperties;
-    double timeStep;
-};
 struct position {
     int x, y;
 };
-struct hitInfo{
-    bool m_contact=0;
+struct hitInfo {
+    bool m_contact = 0;
     int self_id;
     int hit_id;
-    bool hitRegistered=0;
+    bool hitRegistered = 0;
+};
+
+struct CommonResources {
+    KeyState keyState;
+    GameProperties gameProperties;
+    position *playerPosition;
+    double timeStep;
 };
