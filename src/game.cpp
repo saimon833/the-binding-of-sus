@@ -2,10 +2,11 @@
 #include "boss.h"
 #include "my_contact_listener.h"
 #include "obstacle.h"
-#include "params.h"
+//#include "params.h"
 #include "player.h"
 #include "projectile.h"
 #include "wall.h"
+#include "ui.h"
 GameObject *g_player, *g_enemy;
 MyContactListener g_contactListener;
 Game::Game() {
@@ -16,16 +17,19 @@ Game::~Game() {
         delete object;
     }
 }
-void Game::init(const char *title, int xpos, int ypos, bool fullscreen) {
-    Parameters params;
-    m_commonResources.gameProperties = params.getProperties();
+void Game::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen) {
+    //Parameters params;
+    //m_commonResources.gameProperties = params.getProperties();
+    m_commonResources.gameProperties.gameptr=(void*)this;
+    m_commonResources.gameProperties.window_h=height;
+    m_commonResources.gameProperties.window_w=width;
     int flags = 0;
     if (fullscreen) {
         flags = SDL_WINDOW_FULLSCREEN;
     }
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+    if (SDL_Init(SDL_INIT_EVERYTHING && TTF_Init()) == 0) {
         std::cout << "Subsystems Initialised " << std::endl;
-        m_window = SDL_CreateWindow(title, xpos, ypos, m_commonResources.gameProperties.window_w, m_commonResources.gameProperties.window_h, flags);
+        m_window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if (m_window) {
             std::cout << "Window created" << std::endl;
         }
@@ -40,14 +44,15 @@ void Game::init(const char *title, int xpos, int ypos, bool fullscreen) {
     m_b2world = new b2World(gravity);
     m_b2world->SetContactListener(&g_contactListener);
 
-    g_player = new Player(m_b2world, "assets/player.png", m_renderer, m_commonResources, 0, 0);
+    g_player = new Player(m_b2world, "assets/player.png", m_renderer, m_commonResources, 10, 10);
     g_enemy = new Boss(m_b2world, "assets/enemy.png", m_renderer, m_commonResources, 750, 550);
     m_objects.push_back(g_player);
     m_objects.push_back(g_enemy);
-    m_objects.push_back(new Wall(m_b2world, -1, 0, m_commonResources.gameProperties.window_h, 0));
-    m_objects.push_back(new Wall(m_b2world, m_commonResources.gameProperties.window_w + 1, 0, m_commonResources.gameProperties.window_h, 0));
-    m_objects.push_back(new Wall(m_b2world, 1, m_commonResources.gameProperties.window_h, 0, m_commonResources.gameProperties.window_w - 2));
-    m_objects.push_back(new Wall(m_b2world, 1, -1, 0, m_commonResources.gameProperties.window_w - 2));
+    m_objects.push_back(new UI(m_renderer,m_commonResources,50,600));
+    m_objects.push_back(new Wall(m_b2world, 0, 0, 600, 0));
+    m_objects.push_back(new Wall(m_b2world, 800 , 0, 600, 0));
+    m_objects.push_back(new Wall(m_b2world, 0, 600, 0, 800));
+    m_objects.push_back(new Wall(m_b2world, 0, 0, 0, 800));
 
     for (int i = 0; i < 10; i++) {
         m_objects.push_back(new Obstacle(m_b2world, m_renderer, m_commonResources));
@@ -149,6 +154,7 @@ void Game::render() {
 void Game::clean() {
     SDL_DestroyWindow(m_window);
     SDL_DestroyRenderer(m_renderer);
+    TTF_Quit();
     SDL_Quit();
     std::cout << "Game cleaned" << std::endl;
 }

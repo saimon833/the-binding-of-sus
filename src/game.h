@@ -2,8 +2,6 @@
 #include "game_object.h"
 #include "resources.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <box2d/box2d.h>
 #include <iostream>
 #include <vector>
 class Game {
@@ -24,10 +22,11 @@ private:
 public:
     Game();
     ~Game();
-    void init(const char *title, int xpos, int ypos, bool fullscreen);
+    void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
     void handleEvents();
     void update(float frameTime);
     void render();
     void clean();
     bool running() { return m_isRunning; }
+    void stop() {m_isRunning=0;}
 };

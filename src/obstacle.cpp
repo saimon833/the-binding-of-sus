@@ -3,20 +3,20 @@
 #include <ctime>
 Obstacle::Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonResources) {
     GameObject::m_commonResources = &commonResources;
-    int size = m_commonResources->gameProperties.spiriteSize;
+    int size = 32;
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture("assets/box.png", m_renderer);
-    m_position.x = random(m_commonResources->gameProperties.window_w) - m_commonResources->gameProperties.spiriteSize;
-    m_position.y= random(m_commonResources->gameProperties.window_h) - m_commonResources->gameProperties.spiriteSize;
+    m_position.x = random(800) - 32;
+    m_position.y= random(600) - 32;
     //std::cout << m_xpos << " " << m_ypos << std::endl;
-    m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
-    m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
+    m_srcRec.h = 32;
+    m_srcRec.w = 32;
     m_srcRec.x = 0;
     m_srcRec.y = 0;
     m_dstRec.x = m_position.x;
     m_dstRec.y = m_position.y;
-    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
-    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
+    m_dstRec.w = m_srcRec.w * 2;
+    m_dstRec.h = m_srcRec.h * 2;
     b2BodyDef myBodyDef;
     myBodyDef.type = b2_staticBody;
     myBodyDef.position.Set(m_position.x+ 32, m_position.y + 32);

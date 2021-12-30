@@ -73,8 +73,8 @@ void Projectile::update() {
     }
     m_dstRec.x = m_position.x - 6;
     m_dstRec.y = m_position.y - 6;
-    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
-    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
+    m_dstRec.w = m_srcRec.w * 2;
+    m_dstRec.h = m_srcRec.h * 2;
 }
 Projectile::~Projectile() {
     auto *world = m_body->GetWorld();

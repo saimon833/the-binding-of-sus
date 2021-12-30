@@ -1,5 +1,8 @@
 #pragma once
 #include <cstdint>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <box2d/box2d.h>
 struct KeyState {
     bool moveUp = 0, moveDown = 0, moveLeft = 0, moveRight = 0;
     bool shootUp = 0, shootDown = 0, shootLeft = 0, shootRight = 0;
@@ -7,8 +10,7 @@ struct KeyState {
 struct GameProperties {
     int window_h;
     int window_w;
-    int spiriteSize, scale;
-    int projectileSize, projectileScale;
+    void *gameptr;
 };
 struct position {
     int x, y;
@@ -25,4 +27,5 @@ struct CommonResources {
     GameProperties gameProperties;
     position *playerPosition;
     double timeStep;
+    int *playerHP, *bossHP;
 };

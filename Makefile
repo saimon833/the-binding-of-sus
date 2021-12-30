@@ -57,7 +57,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus
+CMAKE_SOURCE_DIR = "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus"
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = "/data/Zabijcie mnie vol 2/Dokumenty/Studia/Cpp/pro/the-binding-of-sus"
@@ -297,30 +297,6 @@ src/obstacle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/obstacle.cpp.s
 .PHONY : src/obstacle.cpp.s
 
-src/params.o: src/params.cpp.o
-.PHONY : src/params.o
-
-# target to build an object file
-src/params.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.o
-.PHONY : src/params.cpp.o
-
-src/params.i: src/params.cpp.i
-.PHONY : src/params.i
-
-# target to preprocess a source file
-src/params.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.i
-.PHONY : src/params.cpp.i
-
-src/params.s: src/params.cpp.s
-.PHONY : src/params.s
-
-# target to generate assembly for a file
-src/params.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/params.cpp.s
-.PHONY : src/params.cpp.s
-
 src/player.o: src/player.cpp.o
 .PHONY : src/player.o
 
@@ -393,6 +369,30 @@ src/texture_manager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/texture_manager.cpp.s
 .PHONY : src/texture_manager.cpp.s
 
+src/ui.o: src/ui.cpp.o
+.PHONY : src/ui.o
+
+# target to build an object file
+src/ui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/ui.cpp.o
+.PHONY : src/ui.cpp.o
+
+src/ui.i: src/ui.cpp.i
+.PHONY : src/ui.i
+
+# target to preprocess a source file
+src/ui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/ui.cpp.i
+.PHONY : src/ui.cpp.i
+
+src/ui.s: src/ui.cpp.s
+.PHONY : src/ui.s
+
+# target to generate assembly for a file
+src/ui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gaem.dir/build.make CMakeFiles/gaem.dir/src/ui.cpp.s
+.PHONY : src/ui.cpp.s
+
 src/wall.o: src/wall.cpp.o
 .PHONY : src/wall.o
 
@@ -447,9 +447,6 @@ help:
 	@echo "... src/obstacle.o"
 	@echo "... src/obstacle.i"
 	@echo "... src/obstacle.s"
-	@echo "... src/params.o"
-	@echo "... src/params.i"
-	@echo "... src/params.s"
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
@@ -459,6 +456,9 @@ help:
 	@echo "... src/texture_manager.o"
 	@echo "... src/texture_manager.i"
 	@echo "... src/texture_manager.s"
+	@echo "... src/ui.o"
+	@echo "... src/ui.i"
+	@echo "... src/ui.s"
 	@echo "... src/wall.o"
 	@echo "... src/wall.i"
 	@echo "... src/wall.s"

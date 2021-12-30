@@ -5,22 +5,23 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
-    m_position.x = x - m_commonResources->gameProperties.spiriteSize;
-    m_position.y = y - m_commonResources->gameProperties.spiriteSize;
-    m_srcRec.h = m_commonResources->gameProperties.spiriteSize;
-    m_srcRec.w = m_commonResources->gameProperties.spiriteSize;
+    m_position.x = x;
+    m_position.y = y;
+    m_srcRec.h = 32;
+    m_srcRec.w = 32;
     m_srcRec.x = 0;
     m_srcRec.y = 0;
     m_dstRec.x = m_position.x;
     m_dstRec.y = m_position.y;
-    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
-    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
+    m_dstRec.w = m_srcRec.w * 2;
+    m_dstRec.h = m_srcRec.h * 2;
+    m_commonResources->bossHP=&m_hp;
     // b2PolygonShape hitBox;
     // hitBox.SetAsBox(2, 1);
 
     auto m_hitBox = new b2BodyDef();
     m_hitBox->type = b2_dynamicBody;
-    m_hitBox->position.Set(x, y);
+    m_hitBox->position.Set(x+32, y+32);
     m_hitBox->angle = 0;
     m_hitBox->linearDamping = 1.0f;
     m_hitBox->angularDamping = 1.0f;
@@ -36,7 +37,7 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     m_hitInfo.self_id = m_ID;
     m_body->GetUserData().pointer = (uintptr_t)&m_hitInfo;
     m_hp = 100;
-    std::cout << "Current HP: " << m_hp << std::endl;
+    //std::cout << "Current HP: " << m_hp << std::endl;
     // std::cout <<Q_rsqrt(2)<<std::endl;
 }
 void Boss::update() {
@@ -44,16 +45,16 @@ void Boss::update() {
     updatePosition();
     m_dstRec.x = m_position.x;
     m_dstRec.y = m_position.y;
-    m_dstRec.w = m_srcRec.w * m_commonResources->gameProperties.scale;
-    m_dstRec.h = m_srcRec.h * m_commonResources->gameProperties.scale;
+    m_dstRec.w = m_srcRec.w * 2;
+    m_dstRec.h = m_srcRec.h * 2;
     // std::cout<<m_contact<<std::endl;
     //  std::cout << m_xpos << " " << m_ypos << std::endl;
-    if (m_hitInfo.m_contact = 1 && m_hitInfo.hit_id > 15 && !m_hitInfo.hitRegistered) {
+    if (m_hitInfo.m_contact = 1 && m_hitInfo.hit_id > 16 && !m_hitInfo.hitRegistered) {
         m_hitTimeAccumulator += m_commonResources->timeStep;
         if (m_hitTimeAccumulator > 50) {
             // std::cout << "Boss hit" << std::endl;
             m_hp -= 2;
-            std::cout << "Current HP: " << m_hp << std::endl;
+            //std::cout << "Current HP: " << m_hp << std::endl;
             m_hitInfo.hitRegistered = 1;
             m_hitTimeAccumulator = 0;
         }
@@ -94,21 +95,23 @@ void Boss::move() {
     m_newVelocity.y = 0;
     int dy = m_position.y - m_commonResources->playerPosition->y;
     int dx = m_position.x - m_commonResources->playerPosition->x;
-    float vy, vx;
-    if (dx != 0) {
-        vx = 1 + dy * dy / (dx * dx);
-        if (dx > 0)
-            m_newVelocity.x = -VELOCITY * Q_rsqrt(vx);
-        else if (dx < 0)
-            m_newVelocity.x = VELOCITY * Q_rsqrt(vx);
-    }
-    if (dy != 0) {
-        vy = dx * dx / (dy * dy) + 1;
-        if (dy > 0)
-            m_newVelocity.y = -VELOCITY * Q_rsqrt(vy);
-        else if (dy < 0)
-            m_newVelocity.y = VELOCITY * Q_rsqrt(vy);
-    }
+    //    float vy, vx;
+    //    if (dx != 0) {
+    //        vx = 1 + dy * dy / (dx * dx);
+    //        if (dx > 0)
+    //            m_newVelocity.x = -VELOCITY * Q_rsqrt(vx);
+    //        else if (dx < 0)
+    //            m_newVelocity.x = VELOCITY * Q_rsqrt(vx);
+    //    }
+    //    if (dy != 0) {
+    //        vy = dx * dx / (dy * dy) + 1;
+    //        if (dy > 0)
+    //            m_newVelocity.y = -VELOCITY * Q_rsqrt(vy);
+    //        else if (dy < 0)
+    //            m_newVelocity.y = VELOCITY * Q_rsqrt(vy);
+    //    }
+    m_newVelocity.x = -VELOCITY * dx * Q_rsqrt(dx * dx + dy * dy);
+    m_newVelocity.y = -VELOCITY * dy * Q_rsqrt(dx * dx + dy * dy);
     m_body->SetLinearVelocity(m_newVelocity);
 }
 Boss::~Boss() {
