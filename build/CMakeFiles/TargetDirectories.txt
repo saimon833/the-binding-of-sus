@@ -1,3 +1,0 @@
-/home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/build/CMakeFiles/gaem.dir
-/home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/build/CMakeFiles/edit_cache.dir
-/home/szymon/Dokumenty/Studia/Cpp/pro/the-binding-of-sus/build/CMakeFiles/rebuild_cache.dir
