@@ -82,12 +82,16 @@ void Game::handleEvents() {
                     break;
                 case SDLK_UP:
                     m_commonResources.keyState.shootUp = 1;
+                    break;
                 case SDLK_DOWN:
                     m_commonResources.keyState.shootDown = 1;
+                    break;
                 case SDLK_LEFT:
                     m_commonResources.keyState.shootLeft = 1;
+                    break;
                 case SDLK_RIGHT:
                     m_commonResources.keyState.shootRight = 1;
+                    break;
                 default:
                     break;
             }
@@ -109,12 +113,16 @@ void Game::handleEvents() {
                     break;
                 case SDLK_UP:
                     m_commonResources.keyState.shootUp = 0;
+                    break;
                 case SDLK_DOWN:
                     m_commonResources.keyState.shootDown = 0;
+                    break;
                 case SDLK_LEFT:
                     m_commonResources.keyState.shootLeft = 0;
+                    break;
                 case SDLK_RIGHT:
                     m_commonResources.keyState.shootRight = 0;
+                    break;
                 default:
                     break;
             }

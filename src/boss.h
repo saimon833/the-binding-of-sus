@@ -3,9 +3,9 @@
 class Boss : public Actor {
 private:
     void move();
-    Uint32 m_moveTimeAccumulator = 1501;
+    //Uint32 m_moveTimeAccumulator = 1501;
     b2Vec2 m_newVelocity;
-    int m_lastDirection = 5;
+    //int m_lastDirection = 5;
     int m_hp;
     double m_hitTimeAccumulator = 0.0;
     float Q_rsqrt(float number);
