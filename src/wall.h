@@ -12,4 +12,6 @@ public:
     ~Wall();
     virtual void render() override{};
     virtual void update() override{};
+    virtual void reset() override{};
+    virtual void nextStage() override{};
 };

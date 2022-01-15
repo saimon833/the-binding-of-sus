@@ -1,8 +1,9 @@
 #pragma once
-#include "game_object.h"
 #include <string>
+
+#include "game_object.h"
 class UI : public GameObject {
-private:
+   private:
     SDL_Renderer *m_renderer;
     TTF_Font *m_font;
     int textw = 0, texth = 0;
@@ -12,9 +13,11 @@ private:
     std::string m_displayText;
     SDL_Rect m_dstRec;
 
-public:
+   public:
     UI(SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y);
     virtual ~UI() override;
     virtual void update() override;
     virtual void render() override;
+    virtual void reset() override{};
+    virtual void nextStage() override{};
 };

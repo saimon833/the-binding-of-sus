@@ -53,3 +53,10 @@ void Obstacle::render() {
 Obstacle::~Obstacle() {
     SDL_DestroyTexture(m_objTexture);
 }
+void Obstacle::reset(){
+    m_position.x = random(800) - 32;
+    m_position.y= random(600) - 32;
+}
+void Obstacle::nextStage(){
+    reset();
+}

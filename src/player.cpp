@@ -6,6 +6,8 @@ Player::Player(b2World *world, const char *texture_sheet, SDL_Renderer *ren, Com
     GameObject::m_commonResources = &commonResources;
     m_position.x = x;
     m_position.y = y;
+    m_startPosition.x=x;
+    m_startPosition.y=y;
     m_srcRec.h = 32;
     m_srcRec.w = 32;
     m_srcRec.x = 0;
@@ -55,7 +57,7 @@ void Player::update() {
         m_recentlyDamaged = 0;
     }
     // std::cout<<m_hitInfo.m_contact<<"\t"<<m_hitInfo.hit_id<<std::endl;
-    if(m_HP==0) m_markedForDelete=1;
+    if(m_HP==0) m_reset=1;
     moveOnInput();
     updatePosition();
     m_dstRec.x = m_position.x;
@@ -91,4 +93,15 @@ Player::~Player() {
     SDL_DestroyTexture(m_objTexture);
     auto* game=(Game*)m_commonResources->gameProperties.gameptr;
     game->stop();
+}
+void Player::reset(){
+    m_HP=4;
+    m_position.x=m_startPosition.x;
+    m_position.y=m_startPosition.y;
+    m_nextStage = 0;
+    m_reset = 0;
+    resetBodyPosition();
+}
+void Player::nextStage(){
+    reset();
 }

@@ -8,3 +8,9 @@ void Actor::updatePosition() {
     m_position.y = position.y - 32;
     // std::cout<<m_xpos<<" "<<m_ypos<<std::endl;
 }
+void Actor::resetBodyPosition() {
+    b2Vec2 tmpPos;
+    tmpPos.x = m_startPosition.x + 32;
+    tmpPos.y = m_startPosition.y + 32;
+    m_body->SetTransform(tmpPos, m_body->GetAngle());
+}

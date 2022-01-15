@@ -1,10 +1,13 @@
 #include "boss.h"
+
 #include <cstdlib>
 #define VELOCITY 3
 Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonResources &commonResources, const int &x, const int &y) {
     m_renderer = ren;
     m_objTexture = TextureManager::LoadTexture(texture_sheet, m_renderer);
     GameObject::m_commonResources = &commonResources;
+    m_startPosition.x = x;
+    m_startPosition.y = y;
     m_position.x = x;
     m_position.y = y;
     m_srcRec.h = 32;
@@ -15,13 +18,14 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     m_dstRec.y = m_position.y;
     m_dstRec.w = m_srcRec.w * 2;
     m_dstRec.h = m_srcRec.h * 2;
-    m_commonResources->bossHP=&m_hp;
+    m_commonResources->bossHP = &m_hp;
+    m_velocity = VELOCITY;
     // b2PolygonShape hitBox;
     // hitBox.SetAsBox(2, 1);
 
     auto m_hitBox = new b2BodyDef();
     m_hitBox->type = b2_dynamicBody;
-    m_hitBox->position.Set(x+32, y+32);
+    m_hitBox->position.Set(x + 32, y + 32);
     m_hitBox->angle = 0;
     m_hitBox->linearDamping = 1.0f;
     m_hitBox->angularDamping = 1.0f;
@@ -37,8 +41,8 @@ Boss::Boss(b2World *world, const char *texture_sheet, SDL_Renderer *ren, CommonR
     m_hitInfo.self_id = m_ID;
     m_body->GetUserData().pointer = (uintptr_t)&m_hitInfo;
     m_hp = 100;
-    //std::cout << "Current HP: " << m_hp << std::endl;
-    // std::cout <<Q_rsqrt(2)<<std::endl;
+    // std::cout << "Current HP: " << m_hp << std::endl;
+    //  std::cout <<Q_rsqrt(2)<<std::endl;
 }
 void Boss::update() {
     move();
@@ -54,43 +58,14 @@ void Boss::update() {
         if (m_hitTimeAccumulator > 50) {
             // std::cout << "Boss hit" << std::endl;
             m_hp -= 2;
-            //std::cout << "Current HP: " << m_hp << std::endl;
+            // std::cout << "Current HP: " << m_hp << std::endl;
             m_hitInfo.hitRegistered = 1;
             m_hitTimeAccumulator = 0;
         }
     }
-    if (m_hp <= 0) m_markedForDelete = 1;
+    if (m_hp <= 0) m_nextStage = 1;
 }
 void Boss::move() {
-    //    if (m_moveTimeAccumulator > 1500 || (m_body->GetLinearVelocity().x == 0 && m_body->GetLinearVelocity().y == 0)) {
-    //        m_newVelocity.x = 0;
-    //        m_newVelocity.y = 0;
-    //
-    //        int direction;
-    //        do {
-    //            direction = rand() % 4;
-    //        } while (direction % 2 == m_lastDirection % 2);
-    //        switch (direction) {
-    //            case 0: {
-    //                m_newVelocity.x = VELOCITY;
-    //                break;
-    //            }
-    //            case 2: {
-    //                m_newVelocity.x = -VELOCITY;
-    //                break;
-    //            }
-    //            case 1: {
-    //                m_newVelocity.y = VELOCITY;
-    //                break;
-    //            }
-    //            case 3: {
-    //                m_newVelocity.y = -VELOCITY;
-    //                break;
-    //            }
-    //        }
-    //        m_lastDirection = direction;
-    //        m_moveTimeAccumulator = 0;
-    //    }
     m_newVelocity.x = 0;
     m_newVelocity.y = 0;
     int dy = m_position.y - m_commonResources->playerPosition->y;
@@ -110,8 +85,8 @@ void Boss::move() {
     //        else if (dy < 0)
     //            m_newVelocity.y = VELOCITY * Q_rsqrt(vy);
     //    }
-    m_newVelocity.x = -VELOCITY * dx * Q_rsqrt(dx * dx + dy * dy);
-    m_newVelocity.y = -VELOCITY * dy * Q_rsqrt(dx * dx + dy * dy);
+    m_newVelocity.x = -m_velocity * dx * Q_rsqrt(dx * dx + dy * dy);
+    m_newVelocity.y = -m_velocity * dy * Q_rsqrt(dx * dx + dy * dy);
     m_body->SetLinearVelocity(m_newVelocity);
 }
 Boss::~Boss() {
@@ -126,8 +101,30 @@ float Boss::Q_rsqrt(float number) {
     x2 = number * 0.5F;
     y = number;
     i = *(long *)&y;
-    i = 0x5f3759df - (i >> 1);                  
+    i = 0x5f3759df - (i >> 1);
     y = *(float *)&i;
     y = y * (threehalfs - (x2 * y * y));
     return y;
+}
+void Boss::nextStage() {
+    m_nextStage = 0;
+    m_reset = 0;
+    m_bossStage++;
+    m_velocity += m_bossStage * 0.5;
+    //m_position = m_startPosition;
+    m_position.x=m_startPosition.x;
+    m_position.y=m_startPosition.y;
+    m_hp = 100 * (1 + 0.5 * m_bossStage);
+    resetBodyPosition();
+}
+void Boss::reset() {
+    m_reset = 0;
+    m_nextStage = 0;
+    m_bossStage = 0;
+    m_velocity = VELOCITY;
+    //m_position = m_startPosition;
+    m_position.x=m_startPosition.x;
+    m_position.y=m_startPosition.y;
+    m_hp = 100;
+    resetBodyPosition();
 }

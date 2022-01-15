@@ -3,7 +3,7 @@
 #include "game_object.h"
 #include "texture_manager.h"
 class Obstacle : public GameObject {
-private:
+   private:
     int m_height;
     int m_width;
     int scale;
@@ -14,9 +14,11 @@ private:
     // SDL_Renderer *m_renderer;
     int random(int n);
 
-public:
+   public:
     Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonResources);
     ~Obstacle();
     virtual void render() override;
     virtual void update() override;
+    virtual void reset() override;
+    virtual void nextStage() override;
 };

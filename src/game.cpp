@@ -1,12 +1,13 @@
 #include "game.h"
+
 #include "boss.h"
 #include "my_contact_listener.h"
 #include "obstacle.h"
 //#include "params.h"
 #include "player.h"
 #include "projectile.h"
-#include "wall.h"
 #include "ui.h"
+#include "wall.h"
 GameObject *g_player, *g_enemy;
 MyContactListener g_contactListener;
 Game::Game() {
@@ -18,11 +19,11 @@ Game::~Game() {
     }
 }
 void Game::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen) {
-    //Parameters params;
-    //m_commonResources.gameProperties = params.getProperties();
-    m_commonResources.gameProperties.gameptr=(void*)this;
-    m_commonResources.gameProperties.window_h=height;
-    m_commonResources.gameProperties.window_w=width;
+    // Parameters params;
+    // m_commonResources.gameProperties = params.getProperties();
+    m_commonResources.gameProperties.gameptr = (void *)this;
+    m_commonResources.gameProperties.window_h = height;
+    m_commonResources.gameProperties.window_w = width;
     int flags = 0;
     if (fullscreen) {
         flags = SDL_WINDOW_FULLSCREEN;
@@ -48,9 +49,9 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     g_enemy = new Boss(m_b2world, "assets/enemy.png", m_renderer, m_commonResources, 750, 550);
     m_objects.push_back(g_player);
     m_objects.push_back(g_enemy);
-    m_objects.push_back(new UI(m_renderer,m_commonResources,50,600));
+    m_objects.push_back(new UI(m_renderer, m_commonResources, 50, 600));
     m_objects.push_back(new Wall(m_b2world, 0, 0, 600, 0));
-    m_objects.push_back(new Wall(m_b2world, 800 , 0, 600, 0));
+    m_objects.push_back(new Wall(m_b2world, 800, 0, 600, 0));
     m_objects.push_back(new Wall(m_b2world, 0, 600, 0, 800));
     m_objects.push_back(new Wall(m_b2world, 0, 0, 0, 800));
 
@@ -67,7 +68,7 @@ void Game::handleEvents() {
             m_isRunning = false;
             break;
         case SDL_KEYDOWN:
-            switch (event.key.keysym.sym) { // ustawianie nacisniecia klawiszy
+            switch (event.key.keysym.sym) {  // ustawianie nacisniecia klawiszy
                 case SDLK_a:
                     m_commonResources.keyState.moveLeft = 1;
                     break;
@@ -98,7 +99,7 @@ void Game::handleEvents() {
             break;
 
         case SDL_KEYUP:
-            switch (event.key.keysym.sym) { // ustawianie puszczenia klawiszy
+            switch (event.key.keysym.sym) {  // ustawianie puszczenia klawiszy
                 case SDLK_a:
                     m_commonResources.keyState.moveLeft = 0;
                     break;
@@ -150,6 +151,12 @@ void Game::update(float frameTime) {
             m_objects.erase(object--);
         }
     }
+    if (g_player->getReset())
+        for (auto object : m_objects)
+            object->reset();
+    if (g_enemy->getNextStage())
+        for (auto object : m_objects)
+            object->nextStage();
 }
 void Game::render() {
     SDL_RenderClear(m_renderer);

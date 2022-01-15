@@ -1,10 +1,11 @@
-#include "game.h"
 #include <cstdlib>
+
+#include "game.h"
 Game *game = nullptr;
 
 int main(/*int argc, char *argv[]*/) {
     srand(time(NULL));
-    const int FPS = 120;
+    const int FPS = 140;
     const double frameDelay = 1000. / FPS;
     Uint32 frameStart;
     float frameTime = 0.0f;
