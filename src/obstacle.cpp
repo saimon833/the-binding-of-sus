@@ -54,9 +54,26 @@ Obstacle::~Obstacle() {
     SDL_DestroyTexture(m_objTexture);
 }
 void Obstacle::reset(){
-    m_position.x = random(800) - 32;
-    m_position.y= random(600) - 32;
+    b2Vec2 tmp;
+    tmp.x = random(800) - 32;
+    tmp.y= random(600) - 32;
+    resetBodyPosition(tmp);
+    m_dstRec.x = m_position.x;
+    m_dstRec.y = m_position.y;
+    m_dstRec.w = m_srcRec.w * 2;
+    m_dstRec.h = m_srcRec.h * 2;
+
 }
 void Obstacle::nextStage(){
     reset();
+}
+void Obstacle::resetBodyPosition(b2Vec2 newPosition) {
+    b2Vec2 tmpPos;
+    tmpPos.x = newPosition.x + 32;
+    tmpPos.y = newPosition.y + 32;
+    m_body->SetTransform(tmpPos, m_body->GetAngle());
+    auto position = m_body->GetPosition();
+    m_position.x = position.x - 32;
+    m_position.y = position.y - 32;
+
 }

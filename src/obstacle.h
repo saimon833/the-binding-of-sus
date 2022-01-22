@@ -13,6 +13,7 @@ class Obstacle : public GameObject {
     SDL_Renderer *m_renderer;
     // SDL_Renderer *m_renderer;
     int random(int n);
+    void resetBodyPosition(b2Vec2 newPosition);
 
    public:
     Obstacle(b2World *world, SDL_Renderer *ren, CommonResources &commonResources);
