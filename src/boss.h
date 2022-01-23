@@ -1,8 +1,6 @@
 #pragma once
 #include "actor.h"
-/**
- * Klasa służąca do tworzenia obektu przeciwnika
- */
+//! Klasa służąca do tworzenia obektu przeciwnika
 class Boss : public Actor {
    private:
     //! Wartość typu int opisująca numer etapu gry
@@ -18,8 +16,7 @@ class Boss : public Actor {
     int m_hp;
     //! Wartość typu double służąca do poprawnego odczytywania trafień pociskami
     double m_hitTimeAccumulator = 0.0;
-    //! Funckja obliczająca 1/sqrt(x)
-    /**
+    /** Funckja obliczająca 1/sqrt(x)
      * Funkcja zaczerpnięta z kodu źródłowego Queake'a 3
      * Funkcja ta aproksymuje wartość wyrażenia z wystarczającą dokładnością
      * @param number Liczba, z której ma być obliczona wartość 1/sqrt(x)

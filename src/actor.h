@@ -1,9 +1,7 @@
 #pragma once
 #include "game_object.h"
 #include "texture_manager.h"
-/**
- * Klasa abstrakcyjna służąca do tworzenia obiektów gracza oraz wroga
- */
+//!Klasa abstrakcyjna służąca do tworzenia obiektów gracza oraz wroga
 class Actor : public GameObject {
    protected:
     //! Wskaźnik do tekstury SDL_Texture

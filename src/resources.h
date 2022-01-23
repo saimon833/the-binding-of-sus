@@ -6,10 +6,22 @@
 //! Struktura przechowująca informację o wciśnieciu klawiszy
 
 struct KeyState {
-    //! Kierunek ruchu postaci
-    bool moveUp = 0, moveDown = 0, moveLeft = 0, moveRight = 0;
-    //! Kierunek strzału
-    bool shootUp = 0, shootDown = 0, shootLeft = 0, shootRight = 0;
+    //! Kierunek ruchu w górę
+    bool moveUp = 0;
+    //! Kierunek ruchu w dół
+    bool moveDown = 0;
+    //! Kierunek ruchu w lewo
+    bool moveLeft = 0;
+    //! Kierunek ruchu w prawo
+    bool moveRight = 0;
+    //! Kierunek strzału w górę
+    bool shootUp = 0;
+    //! Kierunek strzału w dół
+    bool shootDown = 0;
+    //! Kierunek strzału w lewo
+    bool shootLeft = 0;
+    //! Kierunek strzału w prawo
+    bool shootRight = 0;
 };
 //! Struktura przechowywująca informacje o grze
 struct GameProperties {

@@ -39,6 +39,7 @@ public:
     ~Game();
     //! Funckja inicjalizująca grę
     /**
+     * fgjeorgjeroigjeoigjeoi
      * @param title łancuch znakowy przechowujący informacje o tytule okienka
      * @param xpos pozycja na ekranie na osi x
      * @param ypos pozycja na ekranie na osi y
